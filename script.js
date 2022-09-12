@@ -94,6 +94,8 @@ ship.addEventListener("click", function(){
             playerHull = 15;
             createEnemies(3);
             shipStatus = true;
+            missles = 3;
+            playerValues = [15,5,0.7,3]
             alert("Click on the ship to fight off the invader!")
             attackTarget = enemyList[0]
             megaShip = false;
@@ -169,6 +171,7 @@ function resultScreen(){
     }
 }
 
+//arcade mode
 function arcadeEnding(){
     alert("Congratulations soldier, you're going home!")
             //if the player has enough health and enough missles, it starts the boss fight
@@ -181,7 +184,7 @@ function arcadeEnding(){
                 enemyList.push(newEnemy)
                 //creates the weapons
                 for(let i =0; i<4;i++){
-                    newEnemy = new enemyValues (10, 2, 0.5)
+                    newEnemy = new enemyValues (3, 2, 0.5)
                     enemyList.push(newEnemy)
                 }
                 enemyList.push()
@@ -192,9 +195,12 @@ function arcadeEnding(){
             }
 }
 
+//Endless mode
 function endlessEnding(){
     alert("Time to get ready for the next battle")
     alert(`You have ${points} points, you can use them to upgrade your stats.`)
+    
+    //upgrade hull
     let upgrade = true;
     while(upgrade == true && points>=1){
         upgrade = confirm(`Points: ${points} Hull: ${playerValues[0]}\nWould you like to upgrade Hull for 1 point?`)
@@ -203,6 +209,8 @@ function endlessEnding(){
             playerValues[0]++
         }
     }
+
+    //upgrade FP
     upgrade = true;
     while(upgrade == true && points>=2){
         upgrade = confirm(`Points: ${points} FP: ${playerValues[1]}\nWould you like to upgrade FP for 2 points?`)
@@ -211,6 +219,8 @@ function endlessEnding(){
             playerValues[1]++
         }
     }
+
+    //upgrade AC
     upgrade = true;
     while(upgrade == true && points>=3){
         upgrade = confirm(`Points: ${points} AC: ${playerValues[2]}\nWould you like to upgrade AC for 3 points?`)
@@ -219,6 +229,8 @@ function endlessEnding(){
             playerValues[2]= ((playerValues[2]*10)+1)/10;
         }
     }
+
+    //upgrade number of missles
     upgrade = true;
     while(upgrade == true && points>=3){
         upgrade = confirm(`Points: ${points} Missles: ${playerValues[3]}\nWould you like to upgrade missles for 3 points?`)
@@ -227,6 +239,7 @@ function endlessEnding(){
             playerValues[3]++
         }
     }
+    //reset stats
     playerHull = playerValues[0];
     playerFP = playerValues[1];
     playerAC = playerValues[2];
